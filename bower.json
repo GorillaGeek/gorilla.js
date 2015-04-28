@@ -1,0 +1,26 @@
+{
+  "name": "Gorilla.Utilities",
+  "version": "0.0.0",
+  "homepage": "https://github.com/danieloprado/Gorilla.Utilities",
+  "authors": [
+    "danieloprado <danieloprado@outlook.com>"
+  ],
+  "description": "Utilities for Gorilla Geek development",
+  "keywords": [
+    "utilities",
+    "js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11",
+    "jquery-maskedinput": "~1.4.1",
+    "jquery-maskmoney": "~3.0.2"
+  }
+}
