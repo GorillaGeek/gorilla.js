@@ -47,7 +47,6 @@
 
         this.helpers = {
             scrollTo: function (position) {
-                console.log(position);
                 $('html, body').animate({ scrollTop: position }, 300);
             },
 
@@ -128,34 +127,6 @@
 
             ajax: self.ajax
         },
-
-        this.ajax = {
-            setDefaultError: function () {
-                $.ajaxSetup({
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus + ': ' + jqXHR.status + ' ' + errorThrown);
-                        console.log(jqXHR);
-                    }
-                });
-            },
-
-            disableCache: function () {
-                $.ajaxSetup({ cache: false });
-            },
-
-            form: {
-                onBegin: function () {
-                    self.helpers.loading.show();
-                },
-
-                onFailure: function (data) {
-                    self.helpers.loading.hide();
-                    //Modal error
-
-                    console.log(data);
-                }
-            }
-        }
 
         this.nextTabKey = function (form, current) {
             setTimeout(function () {
@@ -408,9 +379,7 @@
             /// onInvalidExtension
             /// onInvalidSize
             /// </param>
-
-            console.log(element)
-
+            
             if (element.is(':file') == false)
                 throw "The element must be a input file";
 
