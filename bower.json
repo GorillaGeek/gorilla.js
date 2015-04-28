@@ -2,6 +2,7 @@
   "name": "gorilla.utilities",
   "version": "0.1.0",
   "homepage": "https://github.com/danieloprado/gorilla.utilities",
+  "main": "dist/gorilla.utilities.js",
   "authors": [
     "danieloprado <danieloprado@outlook.com>"
   ],
@@ -21,6 +22,7 @@
   "dependencies": {
     "jquery": "~1.11",
     "jquery-maskedinput": "~1.4.1",
-    "jquery-maskmoney": "~3.0.2"
+    "jquery-maskmoney": "~3.0.2",
+    "globalize": "~1.0.0"
   }
 }
