@@ -1,7 +1,7 @@
 {
-  "name": "Gorilla.Utilities",
-  "version": "0.0.0",
-  "homepage": "https://github.com/danieloprado/Gorilla.Utilities",
+  "name": "gorilla.utilities",
+  "version": "0.1.0",
+  "homepage": "https://github.com/danieloprado/gorilla.utilities",
   "authors": [
     "danieloprado <danieloprado@outlook.com>"
   ],
