@@ -3,32 +3,6 @@
 (function ($) {
 
     angular.module("utilities", [])
-        .directive("ngHistory", function () {
-            /// <summary>
-            /// 
-            /// </summary>
-            return {
-                restrict: 'A',
-                link: function (scope, elem, attrs) {
-                    elem.click(function () {
-                        history.go(attrs.ngHistory);
-                    });
-                }
-            }
-        })
-        .directive("ngToggleClass", function () {
-            /// <summary>
-            /// Faz a troca rapida de classe no target
-            /// </summary>
-            return {
-                restrict: 'A',
-                link: function ($scope, elem, attrs) {
-                    elem.click(function () {
-                        $(attrs.target).toggleClass(attrs.ngToggleClass);
-                    });
-                }
-            }
-        })
         .directive("ngMask", function () {
             return {
                 /// <summary>
@@ -104,10 +78,6 @@
             var loaderCount = 0;
             return new function () {
                 var self = this;
-
-                this.setFocus = function (selector) {
-                    setTimeout(function () { $(selector).focus(); }, 600);
-                };
 
                 var timeout = 500;
 

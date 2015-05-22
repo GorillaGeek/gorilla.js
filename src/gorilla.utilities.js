@@ -1,79 +1,12 @@
-'use strict';
-
 (function ($, window) {
+    "use strict";
+
     window.$u = new function () {
         var self = this;
-
-        this.constant = {
-            emptyGuid: '00000000-0000-0000-0000-000000000000',
-            alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        };
-
-        this.formats = {
-            mask: {
-                phone: '(99)9999-9999?9',
-                zipCode: '99999-999',
-                date: '99/99/9999',
-                monthYear: '99/99',
-                hour: '99:99',
-                creditcard: "9999-9999-9999-9999",
-                creditcardcsv: '999',
-                cpf: '999.999.999-99',
-                cnpj: "99.999.999/9999-99"
-            },
-
-            dateTime: {
-                shortDate: 'DD/MM/YYYY',
-                shortTime: 'HH:mm',
-                dateAndHours: 'DD/MM/YYYY HH:mm',
-                dateAndHoursSeconds: 'DD/MM/YYYY HH:mm:ss'
-            },
-
-            money: {
-                symbol: 'R$',
-                thousand: '.',
-                decimal: ','
-            },
-        };
-
-        this.regexp = {
-            integer: /\d+/,
-            decimal: /\d+.{1}\d+/,
-            email: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
-            date: /^(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/(19|20)\d\d$/i,
-            time24: /(2[0-23]|[1-9]):[0-5][0-9]/i,
-            timeAMPM: /(1[012]|[1-9]):[0-5][0-9](\s?)(am|pm)/i
-        }
 
         this.helpers = {
             scrollTo: function (position) {
                 $('html, body').animate({ scrollTop: position }, 300);
-            },
-
-            toggleFullscreen: function () {
-                /// <summary>Open or close fullscreen</summary>
-
-                if (document.fullscreenEnabled || document.mozFullscreenEnabled || document.webkitIsFullScreen) {
-                    if (document.cancelFullScreen) {
-                        document.cancelFullScreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.webkitCancelFullScreen) {
-                        document.webkitCancelFullScreen();
-                    }
-                } else {
-                    var elem = $('body')[0];
-
-                    if (elem.requestFullscreen) {
-                        elem.requestFullscreen();
-                    } else if (elem.msRequestFullscreen) {
-                        elem.msRequestFullscreen();
-                    } else if (elem.mozRequestFullScreen) {
-                        elem.mozRequestFullScreen();
-                    } else if (elem.webkitRequestFullscreen) {
-                        elem.webkitRequestFullscreen();
-                    }
-                }
             },
 
             urlRouteTemplate: function (url, params) {
@@ -86,60 +19,8 @@
                 });
 
                 return url;
-            },
-
-            JSON: {
-                isJSONDate: function (date) {
-                    /// <summary>Check if the string is a MVC JSONDate ex: /Date(154889455)/</summary>
-                    /// <param name="date">string</param>
-                    var reg = /\/Date\(.+\)\//;
-                    return reg.test(date);
-                },
-
-                parseJSONDate: function (date) {
-                    /// <summary>Parse a JSONDate to a Date</summary>
-                    /// <param name="date">MVC JSONDate ex: /Date(154889455)/</param>
-                    if (self.helpers.JSON.isJSONDate(date)) {
-                        date = new Date(parseInt(/\d+/.exec(date)));
-                    }
-
-                    return date;
-                },
-
-                undefinedPropToEmpty: function (arrayJson, char) {
-                    /// <summary>Change a undefined value to a empty string or a specfic char</summary>
-                    /// <param name="arrayJson">A json array or a simple json</param>
-                    /// <param name="char">NOT REQUIRED, char to replace ex: '-'</param>
-
-                    if ($.isArray(arrayJson) == false) {
-                        arrayJson = [arrayJson];
-                    }
-
-                    $.each(arrayJson, function (index, json) {
-                        $.each(json, function (prop, val) {
-                            if (json[prop] == undefined || json[prop].length == 0) {
-                                json[prop] = char || "";
-                            }
-                        });
-                    });
-                },
-            },
-
-            ajax: self.ajax
-        },
-
-        this.nextTabKey = function (form, current) {
-            setTimeout(function () {
-                var inputs = $(form).find("input:not(:hidden,:button),select");
-                var idx = inputs.index($(current)[0]);
-
-                if (idx == inputs.length - 1) {
-                    inputs[0].select()
-                } else {
-                    inputs[idx + 1].focus(); //  handles submit buttons
-                }
-            }, 100);
-        }
+            }
+        };
 
         this.setupGlobalize = function (culture) {
             /// <summary>
@@ -160,16 +41,16 @@
 
             // Tell the validator that we want numbers parsed using Globalize
 
-            $.validator.methods.number = function (value, element) {
+            $.validator.methods.number = function (value) {
                 var val = Globalize.parseFloat(value || "0");
-                return value == null || value == undefined || value.length == 0 || ($.isNumeric(val));
+                return value === null || value === undefined || value.length === 0 || ($.isNumeric(val));
             };
 
             // Tell the validator that we want dates parsed using Globalize
 
-            $.validator.methods.date = function (value, element) {
+            $.validator.methods.date = function (value) {
                 var val = Globalize.parseDate(value);
-                return value == null || value == undefined || value.length == 0 || (val);
+                return value === null || value === undefined || value.length === 0 || (val);
             };
 
             // Tell the validator that we want numbers parsed using Globalize, 
@@ -197,8 +78,8 @@
                 return Globalize.parseDate(value) > Globalize.parseDate($(params).val());
             });
             $.validator.unobtrusive.adapters.add("dategreaterthan", ["otherpropertyname"], function (options) {
-                options.rules["dategreaterthan"] = "#" + options.params.otherpropertyname;
-                options.messages["dategreaterthan"] = options.message;
+                options.rules['dategreaterthan'] = "#" + options.params.otherpropertyname;
+                options.messages['dategreaterthan'] = options.message;
             });
 
             /// datelessthan ////// 
@@ -229,16 +110,16 @@
             });
 
             //#endregion 
-        }
+        };
 
         this.validator = {
-            //TODO: rever esses caras
+        
             isNumber: function (n) {
                 return !isNaN(parseFloat(n)) && isFinite(n);
             },
 
             isAlpha: function (cc) {
-                return cc == 32 || (cc > 64 && cc < 91) || (cc > 96 && cc < 123);
+                return cc === 32 || (cc > 64 && cc < 91) || (cc > 96 && cc < 123);
             },
 
             isAlphaNumeric: function (cc) {
@@ -247,18 +128,8 @@
         },
 
         this.isNullOrUndefined = function (v) {
-            return v == undefined || v == null;
-        }
-
-        this.modal = {
-            open: function (header, content, callbackOpen, callbackClose) {
-                throw "Not Implemented";
-            },
-
-            close: function () {
-                throw "Not Implemented";
-            }
-        },
+            return v === undefined || v === null;
+        };
 
         this.newGuid = function () {
             /// <summary>
@@ -287,36 +158,36 @@
                     number = key;
                     return;
                 }
-            })
+            });
 
             return number;
         };
 
         this.masks = {
-            "decimal": function (element, format, options) {
+            decimal: function (element) {
                 element.applyMaskMoney();
             },
             "credit-card-ccv": self.formats.mask.creditcardcsv,
             "credit-card-expiration-date": self.formats.mask.monthYear,
-            "only-alpha": function (element, format, options) {
+            "only-alpha": function (element) {
                 element
                     .keypress(function (e) {
                         var code = (e.keyCode ? e.keyCode : e.which);
                         return self.functions.isAlpha(String.fromCharCode(code));
                     })
                     .change(function () {
-                        if (self.validator.isAlpha(element.val()) == false) {
+                        if (self.validator.isAlpha(element.val()) === false) {
                             element.val('');
                         }
                     });
             },
-            "only-alphanumeric": function (element, format, options) {
+            "only-alphanumeric": function (element) {
                 element.keypress(function (e) {
                     var code = (e.keyCode ? e.keyCode : e.which);
                     return self.functions.isAlphaNumeric(String.fromCharCode(code));
                 });
             },
-            "number": function (element, format, options) {
+            "number": function (element) {
                 element
                     .keypress(function (e) {
                         var code = (e.keyCode ? e.keyCode : e.which);
@@ -335,7 +206,7 @@
             /// <summary>applies the mask for all the masks</summary>
             element = $(element);
 
-            if (self.masks[format] != undefined || self.formats.mask[format]) {
+            if (self.masks[format] !== undefined || self.formats.mask[format]) {
                 var maskFormat = self.masks[format] || self.formats.mask[format];
 
                 if (typeof maskFormat === "function") {
@@ -353,7 +224,7 @@
             /// <summary>Rebuilds the form validation</summary>
             /// <param name="selector" type="Object">Form Selector.</param>
 
-            if (selector == undefined || selector == null || selector == '') {
+            if (selector === undefined || selector === null || selector === '') {
                 selector = "form";
             }
 
@@ -363,88 +234,6 @@
                 $.validator.unobtrusive.parse(selector);
             }, 300);
 
-        };
-
-
-        this.uploadFile = function (element, options) {
-            /// <summary>Verify and upload a file</summary>
-            /// <param name="options" type="Object">
-            /// JSON
-            /// url = string : 'url to upload the file'
-            /// exts: string array: extensions
-            /// maxsize: int in bytes,
-            /// onBegin: function
-            /// onSuccess: function
-            /// onCancel: function
-            /// onInvalidExtension
-            /// onInvalidSize
-            /// </param>
-            
-            if (element.is(':file') == false)
-                throw "The element must be a input file";
-
-            var element = $(element);
-            var parent = element.parent();
-
-            var activeThread = null;
-            element.change(function () {
-                if (element[0].files.length == 0) {
-                    activeThread = null;
-                    options.onCancel();
-                    return false;
-                }
-
-                var file = element[0].files[0];
-
-                var checkFileExtension = function (fileName, extensions) {
-                    var result = false;
-
-                    $.each(extensions, function (key, ext) {
-                        if (ext.indexOf('.') != 0)
-                            ext = '.' + ext;
-
-                        var reg = new RegExp('[\\s\\S]+\\' + ext + '\\b');
-
-                        if (reg.test(fileName)) {
-                            result = true;
-                            return false;
-                        }
-                    });
-
-                    return result;
-                }
-
-                if (!checkFileExtension(file.name, options.exts)) {
-                    options.onInvalidExtension(file);
-                    return false;
-                }
-
-                if (file.size > options.maxsize) {
-                    options.onInvalidSize(file);
-                    return false;
-                }
-
-                var data = new FormData();
-                data.append('file', file);
-
-                options.onBegin();
-
-                var currentThread = activeThread = $u.newGuid();
-
-                $.ajax({
-                    url: options.url,
-                    type: 'POST',
-                    data: data,
-                    cache: false,
-                    dataType: 'json',
-                    processData: false, // Don't process the files
-                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                    success: function (data) {
-                        if (currentThread == activeThread)
-                            options.onSuccess(data);
-                    }
-                });
-            });
         };
 
         /*=====================================
@@ -468,7 +257,7 @@
             var a = this.serializeArray();
 
             $.each(a, function () {
-                if (reg != undefined) {
+                if (reg !== undefined) {
                     this.name = this.name.replace(new RegExp(reg), '');
                 }
 
@@ -492,7 +281,7 @@
             ///</summary>
             ///<Author>Daniel Prado</Author>
             $(this).formatCurrency({ roundToDecimalPlace: 2, negativeFormat: "-%s%n" });
-        }
+        };
 
         $.fn.applyDefaultFormatDecimal = function () {
             ///<summary>
@@ -500,7 +289,7 @@
             ///</summary>
             ///<Author>Daniel Prado/Felipe Esteves</Author>
             $(this).formatCurrency({ roundToDecimalPlace: 2, negativeFormat: "-%s%n", symbol: '', digitGroupSymbol: ',' });
-        }
+        };
 
         $.fn.applyMaskMoney = function () {
             ///<summary>
@@ -522,7 +311,7 @@
                 /// Prevent to add the mask twice
                 $(this).attr('data-current-mask', 'money');
             }
-        }
+        };
 
         //#region String Prototype
 
@@ -552,16 +341,16 @@
             }
 
             return 0;
-        }
+        };
 
         String.prototype.toBool = function () {
             /// <summary>Convert a string to a valid boolean value</summary>
-            return this.toLowerCase() == "true" || this == "1";
-        }
+            return this.toLowerCase() === "true" || this === "1";
+        };
 
         String.prototype.contains = function (value) {
             /// <summary>Returns true if the string contains the value</summary>
-            return this.indexOf(value) != -1;
+            return this.indexOf(value) !== -1;
         };
 
         String.prototype.onlyNumbers = function () {
@@ -592,15 +381,15 @@
                 result = result.replace(defaultDiacriticsRemovalMap[i].letters, defaultDiacriticsRemovalMap[i].base);
             }
             return result;
-        }
+        };
 
         String.prototype.isEqual = function (comparer) {
             /// <summary>
             /// Compara as strings removendo os acentos, espaços e diz se são identicas
             /// </summary>
             var regex = new RegExp(' ', 'g');
-            return this.replace(regex, '').toASCII().toLocaleLowerCase() == comparer.replace(regex, '').toASCII().toLocaleLowerCase();
-        }
+            return this.replace(regex, '').toASCII().toLocaleLowerCase() === comparer.replace(regex, '').toASCII().toLocaleLowerCase();
+        };
 
         String.prototype.replaceAll = function (find, replace) {
             return this.replace(new RegExp(find, 'g'), replace);
@@ -611,18 +400,18 @@
             /// 
             /// </summary>
             return moment(this);
-        }
+        };
 
         String.prototype.toDateBR = function () {
             /// <summary>
             /// 
             /// </summary>
             return this.toDate().format('DD/MM/YYYY');
-        }
+        };
 
         String.prototype.md5 = function () {
             return $u.md5(this);
-        }
+        };
 
         //#endregion
 
@@ -666,34 +455,34 @@
         Array.prototype.any = function () {
             /// <summary>Returns true if the array lenght is greater than zero</summary>
             return this.length > 0;
-        }
+        };
 
         Array.prototype.contains = function (value) {
             /// <summary>Returns true if the array contains the value</summary>
-            return this.indexOf(value) != -1;
+            return this.indexOf(value) !== -1;
         };
 
         Array.prototype.remove = function (v) {
             /// <summary>Removes an item from the array</summary>
             /// <param name="v" type="Object">Item to be removed</param>
-            this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1);
-        }
+            this.splice(this.indexOf(v) === -1 ? this.length : this.indexOf(v), 1);
+        };
 
         Array.prototype.removeAll = function () {
             /// <summary>Removes all the items from the array. Clears the array</summary>
             this.length = 0;
-        }
+        };
 
         Array.prototype.count = function (callback) {
             return this.reduce(function (c, item) {
                 callback(item) && c++;
                 return c;
             }, 0);
-        }
+        };
 
         //#endregion
 
-        this.md5 = (function (string) {
+        this.md5 = (function () {
 
             /* this function is much faster,
             so if possible we use it. Some IEs
@@ -703,28 +492,28 @@
 
             var add32 = function (a, b) {
                 return (a + b) & 0xFFFFFFFF;
-            }
+            };
 
             var cmn = function (q, a, b, x, s, t) {
                 a = add32(add32(a, q), add32(x, t));
                 return add32((a << s) | (a >>> (32 - s)), b);
-            }
+            };
 
             var ff = function (a, b, c, d, x, s, t) {
                 return cmn((b & c) | ((~b) & d), a, b, x, s, t);
-            }
+            };
 
             var gg = function (a, b, c, d, x, s, t) {
                 return cmn((b & d) | (c & (~d)), a, b, x, s, t);
-            }
+            };
 
             var hh = function (a, b, c, d, x, s, t) {
                 return cmn(b ^ c ^ d, a, b, x, s, t);
-            }
+            };
 
             var ii = function (a, b, c, d, x, s, t) {
                 return cmn(c ^ (b | (~d)), a, b, x, s, t);
-            }
+            };
 
             var md5Cycle = function (x, k) {
                 var a = x[0], b = x[1], c = x[2], d = x[3];
@@ -802,7 +591,7 @@
                 x[2] = add32(c, x[2]);
                 x[3] = add32(d, x[3]);
 
-            }
+            };
 
             var md51 = function (s) {
                 var n = s.length,
@@ -822,7 +611,7 @@
                 tail[14] = n * 8;
                 md5Cycle(state, tail);
                 return state;
-            }
+            };
 
             var md5Blk = function (s) {
                 var md5Blks = [], i;
@@ -833,7 +622,7 @@
                     + (s.charCodeAt(i + 3) << 24);
                 }
                 return md5Blks;
-            }
+            };
 
             var hex_chr = '0123456789abcdef'.split('');
 
@@ -843,24 +632,24 @@
                     s += hex_chr[(n >> (j * 8 + 4)) & 0x0F]
                     + hex_chr[(n >> (j * 8)) & 0x0F];
                 return s;
-            }
+            };
 
             var hex = function (x) {
                 for (var i = 0; i < x.length; i++)
                     x[i] = rhex(x[i]);
                 return x.join('');
-            }
+            };
 
             var md5 = function (s) {
                 return hex(md51(s));
-            }
+            };
 
             if (md5('hello') != '5d41402abc4b2a76b9719d911017c592') {
                 add32 = function (x, y) {
                     var lsw = (x & 0xFFFF) + (y & 0xFFFF),
                     msw = (x >> 16) + (y >> 16) + (lsw >> 16);
                     return (msw << 16) | (lsw & 0xFFFF);
-                }
+                };
             }
 
             return md5;
