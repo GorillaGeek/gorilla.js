@@ -1,22 +1,23 @@
-(function ($u) {
+(function ($u, $) {
     "use strict";
 
-    $u.helpers = {
-        scrollTo: function (position) {
-            $('html, body').animate({ scrollTop: position }, 300);
-        },
+    $u.registerModule("helpers", []);
+    var self = $u.helpers = {};
 
-        urlRouteTemplate: function (url, params) {
-            $.each(params, function (key, value) {
-                var reg = new RegExp("\{\{" + key + "\}\}");
-                url = url.replace(reg, encodeURIComponent(value));
-
-                reg = new RegExp("\\\$\\\{" + key + "\\\}");
-                url = url.replace(reg, encodeURIComponent(value));
-            });
-
-            return url;
-        }
+    self.scrollTo = function (position) {
+        $('html, body').animate({ scrollTop: position }, 300);
     };
 
- })(window.$u = window.$u || {});
+    self.urlRouteTemplate = function (url, params) {
+        $.each(params, function (key, value) {
+            var reg = new RegExp("\{\{" + key + "\}\}");
+            url = url.replace(reg, encodeURIComponent(value));
+
+            reg = new RegExp("\\\$\\\{" + key + "\\\}");
+            url = url.replace(reg, encodeURIComponent(value));
+        });
+
+        return url;
+    };
+
+})(window.$u = window.$u || {}, jQuery);
