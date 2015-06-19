@@ -70,6 +70,22 @@
         return $u.cripto.md5(this);
     };
 
+    String.prototype.tmpl = function (json, encodeUrl) {
+        var result = this;
+        encodeUrl = encodeUrl || false;
+
+        $.each(json, function (key, value) {
+            if (encodeUrl) {
+                value = encodeURIComponent(value);
+            }
+
+            var reg = new RegExp("\{\{" + key + "\}\}");
+            result = result.replace(reg, value);
+        });
+
+        return result;
+    }
+
     //#endregion
 
     //#region Array Prototype
