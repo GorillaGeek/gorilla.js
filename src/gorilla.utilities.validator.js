@@ -1,7 +1,6 @@
 (function ($u, $) {
     "use strict";
 
-    $u.registerModule("validator", ["constants"]);
     var self = $u.validator = {};    
 
     self.isNumber= function (n) {
@@ -30,4 +29,4 @@
 
     };
 
- })(window.$u = window.$u || {}, jQuery);
+ })(window.gorilla = window.gorilla || {}, jQuery);

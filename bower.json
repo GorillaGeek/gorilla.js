@@ -23,6 +23,7 @@
     "jquery": "~1.11",
     "jquery-maskedinput": "~1.4.1",
     "jquery-maskmoney": "~3.0.2",
-    "globalize": "~1.0.0"
+    "globalize": "~1.0.0",
+    "jquery-validation":  "1.13.1"
   }
 }

@@ -1,7 +1,6 @@
 (function ($u) {
     "use strict";
 
-    $u.registerModule("cripto", []);
     var self = $u.cripto = {};
 
     self.md5 = (function () {
@@ -115,6 +114,17 @@
 
         };
 
+        var md5Blk = function (s) {
+            var md5Blks = [], i;
+            for (i = 0; i < 64; i += 4) {
+                md5Blks[i >> 2] = s.charCodeAt(i)
+                    + (s.charCodeAt(i + 1) << 8)
+                    + (s.charCodeAt(i + 2) << 16)
+                    + (s.charCodeAt(i + 3) << 24);
+            }
+            return md5Blks;
+        };
+
         var md51 = function (s) {
             var n = s.length,
             state = [1732584193, -271733879, -1732584194, 271733878], i;
@@ -134,39 +144,28 @@
             md5Cycle(state, tail);
             return state;
         };
-
-        var md5Blk = function (s) {
-            var md5Blks = [], i;
-            for (i = 0; i < 64; i += 4) {
-                md5Blks[i >> 2] = s.charCodeAt(i)
-                + (s.charCodeAt(i + 1) << 8)
-                + (s.charCodeAt(i + 2) << 16)
-                + (s.charCodeAt(i + 3) << 24);
-            }
-            return md5Blks;
-        };
-
-        var hex_chr = '0123456789abcdef'.split('');
+       
+        var hexChr = "0123456789abcdef".split("");
 
         var rhex = function (n) {
-            var s = '', j = 0;
+            var s = "", j = 0;
             for (; j < 4; j++)
-                s += hex_chr[(n >> (j * 8 + 4)) & 0x0F]
-                + hex_chr[(n >> (j * 8)) & 0x0F];
+                s += hexChr[(n >> (j * 8 + 4)) & 0x0F]
+                + hexChr[(n >> (j * 8)) & 0x0F];
             return s;
         };
 
         var hex = function (x) {
             for (var i = 0; i < x.length; i++)
                 x[i] = rhex(x[i]);
-            return x.join('');
+            return x.join("");
         };
 
         var md5 = function (s) {
             return hex(md51(s));
         };
 
-        if (md5('hello') != '5d41402abc4b2a76b9719d911017c592') {
+        if (md5("hello") !== "5d41402abc4b2a76b9719d911017c592") {
             add32 = function (x, y) {
                 var lsw = (x & 0xFFFF) + (y & 0xFFFF),
                 msw = (x >> 16) + (y >> 16) + (lsw >> 16);
@@ -178,4 +177,4 @@
 
     })();
 
-})(window.$u = window.$u || {});
+})(window.gorilla = window.gorilla || {});

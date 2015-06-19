@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Gorilla.Utilities", "http://localhost:48754", "{078C3CCB-42F9-4988-B6D7-B680BC19E692}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "gorilla.utilities", "http://localhost:46503", "{E6990D5D-4837-4BF8-9739-0E33A64686D0}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_48754"
-		Debug.AspNetCompiler.PhysicalPath = "..\Gorilla.Utilities\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_48754\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_46503"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Git\gorilla.utilities\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_46503\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_48754"
-		Release.AspNetCompiler.PhysicalPath = "..\Gorilla.Utilities\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_48754\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_46503"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Git\gorilla.utilities\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_46503\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\Gorilla.Utilities\"
+		SlnRelativePath = "..\..\..\..\..\..\Git\gorilla.utilities\"
 	EndProjectSection
 EndProject
 Global
@@ -29,8 +29,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{078C3CCB-42F9-4988-B6D7-B680BC19E692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{078C3CCB-42F9-4988-B6D7-B680BC19E692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6990D5D-4837-4BF8-9739-0E33A64686D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6990D5D-4837-4BF8-9739-0E33A64686D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

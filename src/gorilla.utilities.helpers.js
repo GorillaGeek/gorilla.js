@@ -1,11 +1,10 @@
 (function ($u, $) {
     "use strict";
 
-    $u.registerModule("helpers", []);
     var self = $u.helpers = {};
 
     self.scrollTo = function (position) {
-        $('html, body').animate({ scrollTop: position }, 300);
+        $("html, body").animate({ scrollTop: position }, 300);
     };
 
     self.urlRouteTemplate = function (url, params) {
@@ -20,4 +19,4 @@
         return url;
     };
 
-})(window.$u = window.$u || {}, jQuery);
+})(window.gorilla = window.gorilla || {}, jQuery);

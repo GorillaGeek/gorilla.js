@@ -1,18 +1,17 @@
 (function ($u, $) {
     "use strict";
 
-    $u.registerModule("masks", ["constants", "validator"]);
     var self = $u.mask = {};
 
     $u.formats.mask = {
-        phone: '(99)9999-9999?9',
-        zipCode: '99999-999',
-        date: '99/99/9999',
-        monthYear: '99/99',
-        hour: '99:99',
+        phone: "(99)9999-9999?9",
+        zipCode: "99999-999",
+        date: "99/99/9999",
+        monthYear: "99/99",
+        hour: "99:99",
         creditcard: "9999-9999-9999-9999",
-        creditcardcsv: '999',
-        cpf: '999.999.999-99',
+        creditcardcsv: "999",
+        cpf: "999.999.999-99",
         cnpj: "99.999.999/9999-99"
     };
 
@@ -30,7 +29,7 @@
                 })
                 .change(function () {
                     if ($u.validator.isAlpha(element.val()) === false) {
-                        element.val('');
+                        element.val("");
                     }
                 });
         },
@@ -47,8 +46,8 @@
                     return $u.validator.isNumber(String.fromCharCode(code));
                 })
                 .change(function () {
-                    if (!element.val().match('^[0-9]+$')) {
-                        element.val('');
+                    if (!element.val().match("^[0-9]+$")) {
+                        element.val("");
                     }
                 });
         }
@@ -81,9 +80,9 @@
         elem.formatCurrency({
             roundToDecimalPlace: 2,
             negativeFormat: "-%s%n",
-            symbol: '',
-            digitGroupSymbol: ','
+            symbol: "",
+            digitGroupSymbol: ","
         });
     }
 
-})(window.$u = window.$u || {}, jQuery);
+})(window.gorilla = window.gorilla || {}, jQuery);

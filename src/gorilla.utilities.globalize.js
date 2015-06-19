@@ -1,17 +1,9 @@
 (function ($u, $) {
     "use strict";
 
-    $u.registerModule("globalize", []);
     var self = $u.globalize = {};
 
     self.setCulture = function (culture) {
-        /// <summary>
-        /// Faz a substituição dos validadores jquery.validation para o formato da cultura desejada. Caso contrário, 
-        /// mesmo com o site em pt-BR o jquery continua validando datas e formatos em inglês.
-        /// Referencia em http://icanmakethiswork.blogspot.com.br/2012/09/globalize-and-jquery-validate.html
-        /// </summary>
-
-        //Troca o culture do validate
         Globalize.culture(culture);
 
         // Clone original methods we want to call into
@@ -57,8 +49,8 @@
             return Globalize.parseDate(value) > Globalize.parseDate($(params).val());
         });
         $.validator.unobtrusive.adapters.add("dategreaterthan", ["otherpropertyname"], function (options) {
-            options.rules['dategreaterthan'] = "#" + options.params.otherpropertyname;
-            options.messages['dategreaterthan'] = options.message;
+            options.rules["dategreaterthan"] = "#" + options.params.otherpropertyname;
+            options.messages["dategreaterthan"] = options.message;
         });
 
         /// datelessthan ////// 
@@ -91,4 +83,4 @@
         //#endregion 
     };
 
- })(window.$u = window.$u || {}, jQuery);
+ })(window.gorilla = window.gorilla || {}, jQuery);
