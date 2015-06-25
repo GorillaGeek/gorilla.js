@@ -79,7 +79,19 @@
                 value = encodeURIComponent(value);
             }
 
-            var reg = new RegExp("\{\{" + key + "\}\}");
+            var reg = new RegExp("\{\{" + key + "\}\}", "g");
+            result = result.replace(reg, value);
+        });
+
+        return result;
+    }
+
+    String.prototype.format = function (array) {
+        var result = this;
+
+        $.each(array, function (key, value) {
+            var reg = new RegExp("\{[" + key + "]\}", "g");
+            console.log(reg);
             result = result.replace(reg, value);
         });
 

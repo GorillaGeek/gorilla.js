@@ -22,5 +22,4 @@
         return result;
     }
 
-
 })(window.gorilla = window.gorilla || {}, jQuery);
