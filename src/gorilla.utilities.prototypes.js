@@ -86,12 +86,11 @@
         return result;
     }
 
-    String.prototype.format = function (array) {
+    String.prototype.format = function () {
         var result = this;
 
-        $.each(array, function (key, value) {
+        $.each(arguments, function (key, value) {
             var reg = new RegExp("\{[" + key + "]\}", "g");
-            console.log(reg);
             result = result.replace(reg, value);
         });
 
