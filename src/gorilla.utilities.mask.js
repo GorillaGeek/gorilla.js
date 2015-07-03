@@ -66,7 +66,7 @@
         elem.mask(maskFormat || format);
     };
 
-    $.fn.bindMaskMoney = function () {
+    $.fn.bindMaskMoney = function() {
         var elem = $(this);
 
         elem.maskMoney({
@@ -83,6 +83,6 @@
             symbol: "",
             digitGroupSymbol: ","
         });
-    }
+    };
 
 })(window.gorilla = window.gorilla || {}, jQuery);

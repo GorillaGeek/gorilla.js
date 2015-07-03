@@ -42,15 +42,13 @@
             return originalMethods.range.call(this, val, element, param);
         };
 
-        //#region Métodos personalizados para a validação de data
-
         /// dategreaterthan ////// 
         $.validator.addMethod("dategreaterthan", function (value, element, params) {
             return Globalize.parseDate(value) > Globalize.parseDate($(params).val());
         });
         $.validator.unobtrusive.adapters.add("dategreaterthan", ["otherpropertyname"], function (options) {
-            options.rules["dategreaterthan"] = "#" + options.params.otherpropertyname;
-            options.messages["dategreaterthan"] = options.message;
+            options.rules.dategreaterthan = "#" + options.params.otherpropertyname;
+            options.messages.dategreaterthan = options.message;
         });
 
         /// datelessthan ////// 
@@ -58,8 +56,8 @@
             return Globalize.parseDate(value) < Globalize.parseDate($(params).val());
         });
         $.validator.unobtrusive.adapters.add("datelessthan", ["otherpropertyname"], function (options) {
-            options.rules["datelessthan"] = "#" + options.params.otherpropertyname;
-            options.messages["datelessthan"] = options.message;
+            options.rules.datelessthan = "#" + options.params.otherpropertyname;
+            options.messages.datelessthan = options.message;
         });
 
         /// dategreaterthanorequalto ////// 
@@ -67,8 +65,8 @@
             return Globalize.parseDate(value) >= Globalize.parseDate($(params).val());
         });
         $.validator.unobtrusive.adapters.add("dategreaterthanorequalto", ["otherpropertyname"], function (options) {
-            options.rules["dategreaterthanorequalto"] = "#" + options.params.otherpropertyname;
-            options.messages["dategreaterthanorequalto"] = options.message;
+            options.rules.dategreaterthanorequalto = "#" + options.params.otherpropertyname;
+            options.messages.dategreaterthanorequalto = options.message;
         });
 
         /// datelessthanorequalto ////// 
@@ -76,11 +74,9 @@
             return Globalize.parseDate(value) <= Globalize.parseDate($(params).val());
         });
         $.validator.unobtrusive.adapters.add("datelessthanorequalto", ["otherpropertyname"], function (options) {
-            options.rules["datelessthanorequalto"] = "#" + options.params.otherpropertyname;
-            options.messages["datelessthanorequalto"] = options.message;
+            options.rules.datelessthanorequalto = "#" + options.params.otherpropertyname;
+            options.messages.datelessthanorequalto = options.message;
         });
-
-        //#endregion 
     };
 
  })(window.gorilla = window.gorilla || {}, jQuery);

@@ -117,10 +117,10 @@
         var md5Blk = function (s) {
             var md5Blks = [], i;
             for (i = 0; i < 64; i += 4) {
-                md5Blks[i >> 2] = s.charCodeAt(i)
-                    + (s.charCodeAt(i + 1) << 8)
-                    + (s.charCodeAt(i + 2) << 16)
-                    + (s.charCodeAt(i + 3) << 24);
+                md5Blks[i >> 2] = s.charCodeAt(i) +
+                    (s.charCodeAt(i + 1) << 8) +
+                    (s.charCodeAt(i + 2) << 16) +
+                    (s.charCodeAt(i + 3) << 24);
             }
             return md5Blks;
         };
@@ -150,8 +150,8 @@
         var rhex = function (n) {
             var s = "", j = 0;
             for (; j < 4; j++)
-                s += hexChr[(n >> (j * 8 + 4)) & 0x0F]
-                + hexChr[(n >> (j * 8)) & 0x0F];
+                s += hexChr[(n >> (j * 8 + 4)) & 0x0F] +
+                    hexChr[(n >> (j * 8)) & 0x0F];
             return s;
         };
 
