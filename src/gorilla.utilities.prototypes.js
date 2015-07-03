@@ -21,17 +21,17 @@
         });
 
         return o;
-    };
+    }
 
     //#region String Prototype
 
     String.prototype.contains = function (value) {
         return this.indexOf(value) !== -1;
-    };
+    }
 
     String.prototype.onlyNumbers = function () {
         return this.replace(/\D/g, "");
-    };
+    }
 
     String.prototype.replaceLast = function (find, replace) {
         var index = this.lastIndexOf(find);
@@ -39,7 +39,7 @@
             return this.substring(0, index) + replace + this.substring(index + find.length);
         }
         return this.toString();
-    };
+    }
 
     String.prototype.toSlug = function () {
         var result = this;
@@ -52,23 +52,36 @@
         result = result.toLocaleLowerCase();
 
         return result;
-    };
+    }
 
     String.prototype.isEqual = function (comparer) {
         return this.toSlug() === (comparer + "").toSlug();
-    };
+    }
 
     String.prototype.replaceAll = function (find, replace) {
         return this.replace(new RegExp(find, "g"), replace);
-    };
+    }
 
     String.prototype.toDate = function () {
         return moment(this);
-    };
+    }
+
+    String.prototype.toNumber = function () {
+        var value = this;
+        var result = 0;
+
+        if (Globalize) {
+            result = Globalize.parseFloat(value);
+        } if ($.isNumeric(value)) {
+            result = parseFloat(value);
+        }
+
+        return isNaN(result) ? 0 : result;
+    }
 
     String.prototype.md5 = function () {
         return $u.cripto.md5(this);
-    };
+    }
 
     String.prototype.tmpl = function (json, encodeUrl) {
         var result = this;
@@ -103,19 +116,19 @@
 
     Array.prototype.any = function () {
         return this.length > 0;
-    };
+    }
 
     Array.prototype.contains = function (value) {
         return this.indexOf(value) !== -1;
-    };
+    }
 
     Array.prototype.remove = function (v) {
         this.splice(this.indexOf(v) === -1 ? this.length : this.indexOf(v), 1);
-    };
+    }
 
     Array.prototype.removeAll = function () {
         this.length = 0;
-    };
+    }
 
     Array.prototype.count = function (callback) {
         return this.reduce(function (c, item) {
@@ -124,7 +137,7 @@
 
             return c;
         }, 0);
-    };
+    }
 
     //#endregion
 
