@@ -31,7 +31,7 @@
         timeAMPM: /(1[012]|[1-9]):[0-5][0-9](\s?)(am|pm)/i,
 
         youtube: /^https?:\/\/?(?:www\.)?youtube\.com(?:\/watch\?v=|\/)([^\s&]+)/i,
-        vimeo: /^https?:\/\/(?:www\.)?vimeo\.com\/.*(\d+)\/?$/i
+        vimeo: /^https?:\/\/(?:www\.)?vimeo\.com\/(\d+)\/?$/i
     };
 
 
