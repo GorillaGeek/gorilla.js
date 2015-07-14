@@ -25,7 +25,7 @@
             element
                 .keypress(function (e) {
                     var code = (e.keyCode ? e.keyCode : e.which);
-                    return $u.validator.isAlpha(String.fromCharCode(code));
+                    return code == 8 || $u.validator.isAlpha(String.fromCharCode(code));
                 })
                 .change(function () {
                     if ($u.validator.isAlpha(element.val()) === false) {
@@ -36,14 +36,14 @@
         "alphanumeric": function (element) {
             element.keypress(function (e) {
                 var code = (e.keyCode ? e.keyCode : e.which);
-                return $u.validator.isAlphaNumeric(String.fromCharCode(code));
+                return code == 8 || $u.validator.isAlphaNumeric(String.fromCharCode(code));
             });
         },
         "number": function (element) {
             element
                 .keypress(function (e) {
                     var code = (e.keyCode ? e.keyCode : e.which);
-                    return $u.validator.isNumber(String.fromCharCode(code));
+                    return code == 8 || $u.validator.isNumber(String.fromCharCode(code));
                 })
                 .change(function () {
                     if (!element.val().match("^[0-9]+$")) {

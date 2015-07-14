@@ -30,8 +30,8 @@
         time24: /(2[0-23]|[1-9]):[0-5][0-9]/i,
         timeAMPM: /(1[012]|[1-9]):[0-5][0-9](\s?)(am|pm)/i,
 
-        youtube: /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/i,
-        vimeo: /(?:https?:\/{2})?(?:w{3}\.)?vimeo.com\/(\d+)($|\/)/i
+        youtube: /^https?:\/\/?(?:www\.)?youtube\.com(?:\/watch\?v=|\/)([^\s&]+)/i,
+        vimeo: /^https?:\/\/(?:www\.)?vimeo\.com\/.*(\d+)\/?$/i
     };
 
 

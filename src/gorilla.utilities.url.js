@@ -9,7 +9,7 @@
       return null;
     }
 
-    return code[1];
+    return code.pop();
   };
 
   self.vimeo = function(url) {
@@ -18,7 +18,7 @@
       return null;
     }
 
-    return code[1];
+    return code.pop();
   };
 
   self.videoInfo = function(videoUrl) {
