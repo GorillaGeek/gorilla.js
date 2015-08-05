@@ -19,7 +19,8 @@
         /// <summary>Rebuilds the form validation</summary>
         /// <param name="selector" type="Object">Form Selector.</param>
 
-        var form = $(selector || "form");
+        selector = selector || "form";
+        var form = $(selector);
 
         setTimeout(function () {
             form.removeData("validator");
