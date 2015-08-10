@@ -1,144 +1,162 @@
-(function ($u, $) {
-    "use strict";
+(function($u, $, Globalize, moment) {
+  "use strict";
 
-    $.fn.serializeObject = function (reg) {
-        var o = {}, a = this.serializeArray();
+  $.fn.serializeObject = function(reg) {
+    var o = {},
+      a = this.serializeArray();
 
-        $.each(a, function () {
-            if (reg !== undefined) {
-                this.name = this.name.replace(new RegExp(reg), "");
-            }
+    $.each(a, function() {
+      if (reg !== undefined) {
+        this.name = this.name.replace(new RegExp(reg), "");
+      }
 
-            if (o[this.name]) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || "");
-            } else {
-                o[this.name] = this.value || "";
-            }
-        });
-
-        return o;
-    };
-
-    //#region String Prototype
-
-    String.prototype.contains = function (value) {
-        return this.indexOf(value) !== -1;
-    };
-
-    String.prototype.onlyNumbers = function () {
-        return this.replace(/\D/g, "");
-    };
-
-    String.prototype.replaceLast = function (find, replace) {
-        var index = this.lastIndexOf(find);
-        if (index >= 0) {
-            return this.substring(0, index) + replace + this.substring(index + find.length);
+      if (o[this.name]) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
         }
-        return this.toString();
-    };
+        o[this.name].push(this.value || "");
+      } else {
+        o[this.name] = this.value || "";
+      }
+    });
 
-    String.prototype.toSlug = function() {
-        var result = this;
-        for (var i = 0; i < $u.defaultDiacriticsRemovalMap.length; i++) {
-            result = result.replace($u.defaultDiacriticsRemovalMap[i].letters, $u.defaultDiacriticsRemovalMap[i].base);
-        }
+    return o;
+  };
 
-        result = result.replace(/\s+/gi, "-");
-        result = result.trim("-");
-        result = result.toLocaleLowerCase();
+  //#region String Prototype
 
-        return result;
-    };
+  String.prototype.contains = function(value) {
+    return this.indexOf(value) !== -1;
+  };
 
-    String.prototype.isEqual = function(comparer) {
-        return this.toSlug() === (comparer + "").toSlug();
-    };
+  String.prototype.onlyNumbers = function() {
+    return this.replace(/\D/g, "");
+  };
 
-    String.prototype.replaceAll = function(find, replace) {
-        return this.replace(new RegExp(find, "g"), replace);
-    };
+  String.prototype.replaceLast = function(find, replace) {
+    var index = this.lastIndexOf(find);
+    if (index >= 0) {
+      return this.substring(0, index) + replace + this.substring(index + find.length);
+    }
+    return this.toString();
+  };
 
-    String.prototype.toDate = function() {
-        return moment(this);
-    };
+  String.prototype.toSlug = function() {
+    var result = this;
+    for (var i = 0; i < $u.defaultDiacriticsRemovalMap.length; i++) {
+      result = result.replace($u.defaultDiacriticsRemovalMap[i].letters, $u.defaultDiacriticsRemovalMap[i].base);
+    }
 
-    String.prototype.toNumber = function() {
-        var value = this;
-        var result = 0;
+    result = result.replace(/\s+/gi, "-");
+    result = result.trim("-");
+    result = result.toLocaleLowerCase();
 
-        if (Globalize) {
-            result = Globalize.parseFloat(value);
-        }
-        if ($.isNumeric(value)) {
-            result = parseFloat(value);
-        }
+    return result;
+  };
 
-        return isNaN(result) ? 0 : result;
-    };
+  String.prototype.isEqual = function(comparer) {
+    return this.toSlug() === (comparer + "").toSlug();
+  };
 
-    String.prototype.md5 = function() {
-        return $u.cripto.md5(this);
-    };
+  String.prototype.replaceAll = function(find, replace) {
+    return this.replace(new RegExp(find, "g"), replace);
+  };
 
-    String.prototype.tmpl = function(json, encodeUrl) {
-        var result = this;
-        encodeUrl = encodeUrl || false;
+  String.prototype.toDate = function() {
+    return moment(this);
+  };
 
-        $.each(json, function(key, value) {
-            if (encodeUrl) {
-                value = encodeURIComponent(value);
-            }
+  String.prototype.toNumber = function() {
+    var value = this;
+    var result = 0;
 
-            var reg = new RegExp("\{\{" + key + "\}\}", "g");
-            result = result.replace(reg, value);
-        });
+    if (Globalize) {
+      result = Globalize.parseFloat(value);
+    }
 
-        return result;
-    };
+    if ($.isNumeric(value)) {
+      result = parseFloat(value);
+    }
 
-    String.prototype.format = function() {
-        var result = this;
+    return isNaN(result) ? 0 : result;
+  };
 
-        $.each(arguments, function(key, value) {
-            var reg = new RegExp("\{[" + key + "]\}", "g");
-            result = result.replace(reg, value);
-        });
+  String.prototype.md5 = function() {
+    return $u.cripto.md5(this);
+  };
 
-        return result;
-    };
+  String.prototype.tmpl = function(json, encodeUrl) {
+    var result = this;
+    encodeUrl = encodeUrl || false;
 
-    //#endregion
+    $.each(json, function(key, value) {
+      if (encodeUrl) {
+        value = encodeURIComponent(value);
+      }
 
-    //#region Array Prototype
+      var reg = new RegExp("\{\{" + key + "\}\}", "g");
+      result = result.replace(reg, value);
+    });
 
-    Array.prototype.any = function() {
-        return this.length > 0;
-    };
+    return result;
+  };
 
-    Array.prototype.contains = function(value) {
-        return this.indexOf(value) !== -1;
-    };
+  String.prototype.format = function() {
+    var result = this;
 
-    Array.prototype.remove = function(v) {
-        this.splice(this.indexOf(v) === -1 ? this.length : this.indexOf(v), 1);
-    };
+    $.each(arguments, function(key, value) {
+      var reg = new RegExp("\{[" + key + "]\}", "g");
+      result = result.replace(reg, value);
+    });
 
-    Array.prototype.removeAll = function() {
-        this.length = 0;
-    };
+    return result;
+  };
 
-    Array.prototype.count = function(callback) {
-        return this.reduce(function(c, item) {
-            if (callback(item))
-                c++;
+  //#endregion
 
-            return c;
-        }, 0);
-    };
+  //#region Number
 
-    //#endregion
+  Number.prototype.pad = function(size, caracter) {
+    var result = this + "";
+    caracter = caracter || "0";
 
-})(window.gorilla = window.gorilla || {}, jQuery);
+    if (size <= result.length) {
+      return result;
+    }
+
+    while (result.length < size) result = caracter + result;
+    return result.substr(-size);
+  };
+
+  //#endregion
+
+  //#region Array Prototype
+
+  Array.prototype.any = function() {
+    return this.length > 0;
+  };
+
+  Array.prototype.contains = function(value) {
+    return this.indexOf(value) !== -1;
+  };
+
+  Array.prototype.remove = function(v) {
+    this.splice(this.indexOf(v) === -1 ? this.length : this.indexOf(v), 1);
+  };
+
+  Array.prototype.removeAll = function() {
+    this.length = 0;
+  };
+
+  Array.prototype.count = function(callback) {
+    return this.reduce(function(c, item) {
+      if (callback(item))
+        c++;
+
+      return c;
+    }, 0);
+  };
+
+  //#endregion
+
+})(window.gorilla = window.gorilla || {}, jQuery, window.Globalize, window.moment);
