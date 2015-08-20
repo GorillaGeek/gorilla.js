@@ -89,14 +89,18 @@
     var result = this;
     encodeUrl = encodeUrl || false;
 
-    $.each(json, function(key, value) {
+    var reg = /\{\{([^\}]*)\}\}/gm;
+    var match = null;
+
+    while ((match = reg.exec(result))) {
+      var value = json[match[1]] || "";
+
       if (encodeUrl) {
         value = encodeURIComponent(value);
       }
 
-      var reg = new RegExp("\{\{" + key + "\}\}", "g");
-      result = result.replace(reg, value);
-    });
+      result = result.replace(match[0], value);
+    }
 
     return result;
   };
