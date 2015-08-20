@@ -93,7 +93,6 @@
     var match = null;
 
     while ((match = reg.exec(this))) {
-      console.log(match);
       var value = json[match[1]] || "";
 
       if (encodeUrl) {
