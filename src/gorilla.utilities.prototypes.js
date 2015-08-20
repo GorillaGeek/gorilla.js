@@ -92,7 +92,8 @@
     var reg = /\{\{([^\}]*)\}\}/gm;
     var match = null;
 
-    while ((match = reg.exec(result))) {
+    while ((match = reg.exec(this))) {
+      console.log(match);
       var value = json[match[1]] || "";
 
       if (encodeUrl) {
