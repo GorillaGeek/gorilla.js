@@ -2,7 +2,6 @@
     "use strict";
 
     self.constant = {
-        emptyGuid: "00000000-0000-0000-0000-000000000000",
         alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     };
 
