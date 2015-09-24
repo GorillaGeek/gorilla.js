@@ -1,4 +1,4 @@
-(function($u, $) {
+(function($u) {
     "use strict";
 
     var self = $u.guid = {};
@@ -7,7 +7,9 @@
 
     self.new = function() {
         var S4 = function() {
-            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
         };
 
         return (S4() + S4() + "-" +
@@ -17,4 +19,4 @@
             S4() + S4() + S4());
     };
 
-})(window.gorilla = window.gorilla || {}, jQuery);
+})(window.gorilla = window.gorilla || {});
