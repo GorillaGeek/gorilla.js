@@ -11,32 +11,27 @@ var sourcemaps = require("gulp-sourcemaps");
 
 var jsFiles = ["src/**/*.js"];
 
-gulp.task("clean", function() {
-    return gulp.src(["dist/gorilla.min.js"], {
-            read: false
-        })
-        .pipe(clean({
-            force: true
-        }));
+gulp.task("default", ["minify"], function() {
+	return gulp.src(jsFiles)
+		.pipe(concat("gorilla.js"))
+		.pipe(gulp.dest("dist"));
+});
+
+gulp.task("watch", ['default'], function() {
+	gulp.watch(jsFiles, ["default"]);
 });
 
 gulp.task("lint", function() {
-    return gulp.src(jsFiles)
-        .pipe(jshint())
-        .pipe(jshint.reporter("default"));
+	return gulp.src(jsFiles)
+		.pipe(jshint())
+		.pipe(jshint.reporter("default"));
 });
 
 gulp.task("minify", ["lint"], function() {
-    return gulp.src(jsFiles)
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(concat("gorilla.min.js"))
-        .pipe(gulp.dest("dist"));
+	return gulp.src(jsFiles)
+		.pipe(sourcemaps.init())
+		.pipe(uglify())
+		.pipe(concat("gorilla.min.js"))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest("dist"));
 });
-
-gulp.task("watch", function() {
-    gulp.watch(jsFiles, ["minify"]);
-});
-
-// Default Task
-gulp.task("default", ["minify"]);
