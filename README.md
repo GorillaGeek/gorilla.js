@@ -14,3 +14,9 @@ Modules
 * prototypes
 * url
 * validator
+
+Bower
+---------
+```bash
+bower install gorilla --save
+```
