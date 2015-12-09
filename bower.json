@@ -1,6 +1,6 @@
 {
-	"name": "gorilla.utilities",
-	"version": "1.0.1.0",
+	"name": "gorilla",
+	"version": "1.1.1",
 	"homepage": "https://github.com/danieloprado/gorilla.utilities",
 	"main": "dist/gorilla.min.js",
 	"authors": [
