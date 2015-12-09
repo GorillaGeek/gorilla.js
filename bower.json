@@ -1,25 +1,26 @@
 {
-	"name": "gorilla",
-	"version": "1.1.1",
-	"homepage": "https://github.com/danieloprado/gorilla.utilities",
-	"main": "dist/gorilla.min.js",
-	"authors": [
-		"danieloprado <danieloprado@outlook.com>"
-	],
-	"description": "Utilities for Gorilla Geek development",
-	"keywords": [
-		"utilities",
-		"js"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-		"jquery": "~1.11"
-	}
+  "name": "gorilla",
+  "version": "1.1.1",
+  "homepage": "https://github.com/danieloprado/gorilla.utilities",
+  "main": "dist/gorilla.min.js",
+  "authors": [
+    "danieloprado <danieloprado@outlook.com>"
+  ],
+  "description": "Utilities for Gorilla Geek development",
+  "keywords": [
+    "utilities",
+    "js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11"
+  },
+  "moduleType": []
 }
